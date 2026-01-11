@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TalkInteract : Interacterable
 {
+    [SerializeField] DialogueContainer dialogue;
+
     public override void Interact(Character character)
     {
-        Debug.Log("You talked with me congratulation!");
+        GameManager.instance.dialogueSystem.Initialize(dialogue);
     }
 }
