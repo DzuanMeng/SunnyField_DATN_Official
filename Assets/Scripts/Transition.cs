@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,8 +16,18 @@ public class Transition : MonoBehaviour
     [SerializeField] TransitionType transitionType;
     [SerializeField] string sceneNameToTransition;
     [SerializeField] Vector3 targetPosition;
+    [SerializeField] Collider2D confiner;
 
-    Transform destination;
+    CameraConfiner cameraConfiner;
+    [SerializeField] Transform destination;
+
+    void Start()
+    {
+        if ( confiner != null )
+        {
+            cameraConfiner = FindObjectOfType<CameraConfiner>();
+        }
+    }
 
     internal void InitiateTransition(Transform toTransition)
     {
@@ -24,6 +35,11 @@ public class Transition : MonoBehaviour
         {
             case TransitionType.Warp:
                 Cinemachine.CinemachineBrain currentCamera = Camera.main.GetComponent<Cinemachine.CinemachineBrain>();
+
+                if (cameraConfiner != null)
+                {
+                    cameraConfiner.UpdateBounds(confiner);
+                }
 
                 currentCamera.ActiveVirtualCamera.OnTargetObjectWarped(
                     toTransition,
@@ -34,6 +50,7 @@ public class Transition : MonoBehaviour
                     destination.position.y,
                     toTransition.position.z
                 );
+
                 break;
             case TransitionType.Scene:
                 GameSceneManager.instance.InitSwitchScene(sceneNameToTransition, targetPosition);
@@ -41,9 +58,16 @@ public class Transition : MonoBehaviour
         }
     }
 
-    void Start()
+    private void OnDrawGizmos()
     {
-        destination = transform.GetChild(1);
-    }
+        if (transitionType == TransitionType.Scene)
+        {
+            Handles.Label(transform.position, "to " + sceneNameToTransition);
+        }
 
+        if ( transitionType == TransitionType.Warp)
+        {
+            Gizmos.DrawLine(transform.position, destination.position);
+        }
+    }
 }

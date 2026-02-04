@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Plow
   m_EditorClassIdentifier: 
   Name: Plow
+  id: 5
   stackable: 0
   icon: {fileID: 21300000, guid: dd4f67b9043dd254182274bcffc21f8b, type: 3}
   onAction: {fileID: 0}
   onTileMapAction: {fileID: 11400000, guid: 96df4d7b3270e8744a5f4bbdc8560b30, type: 2}
   onItemUsed: {fileID: 0}
+  crop: {fileID: 0}
+  iconHighlight: 0
+  itemPrefab: {fileID: 0}

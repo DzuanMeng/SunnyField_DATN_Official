@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: StonePile
   m_EditorClassIdentifier: 
   Name: Stone pile
+  id: 9
   stackable: 0
   icon: {fileID: 21300000, guid: 52964d3159a159540b4e1090b61d7f4b, type: 3}
   onAction: {fileID: 0}
   onTileMapAction: {fileID: 0}
   onItemUsed: {fileID: 0}
   crop: {fileID: 0}
+  iconHighlight: 0
+  itemPrefab: {fileID: 0}

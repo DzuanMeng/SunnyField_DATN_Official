@@ -7,14 +7,38 @@ public class InventoryController : MonoBehaviour
     [SerializeField] GameObject panel;
     [SerializeField] GameObject statusPanel;
     [SerializeField] GameObject toolbarPanel;
+    [SerializeField] GameObject additionalPanel;
+    [SerializeField] GameObject storePanel;
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.I))
         {
-            panel.SetActive(!panel.activeInHierarchy);
-            statusPanel.SetActive(!statusPanel.activeInHierarchy);
-            toolbarPanel.SetActive(!toolbarPanel.activeInHierarchy);
+            if (panel.activeInHierarchy == false)
+            {
+                Open();
+            }
+            else
+            {
+                Close();
+            }
         }
+    }
+
+    public void Open()
+    {
+        panel.SetActive(true);
+        statusPanel.SetActive(true);
+        toolbarPanel.SetActive(false);
+        storePanel.SetActive(false);
+    }
+
+    public void Close()
+    {
+        panel.SetActive(false);
+        statusPanel.SetActive(false);
+        toolbarPanel.SetActive(true);
+        additionalPanel.SetActive(false);
+        storePanel.SetActive(false);
     }
 }

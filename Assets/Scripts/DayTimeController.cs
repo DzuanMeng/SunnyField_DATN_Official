@@ -6,10 +6,30 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
+public enum DayOfWeek
+{
+    Sunday,
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday
+}
+
+public enum Season
+{
+    Winter,
+    Spring,
+    Summer,
+    Autumn
+}
+
 public class DayTimeController : MonoBehaviour
 {
     const float secondsInDay = 86400f;
     const float phaseLength = 900f; // 15 minutes chunk of time
+    const float phaseInDay = 96f; //secondsInDay divided by phaseLength
 
     [SerializeField] Color nightLightColor;
     [SerializeField] AnimationCurve nightTimeCurve;
@@ -18,10 +38,18 @@ public class DayTimeController : MonoBehaviour
     float time;
     [SerializeField] float timeScale = 60f;
     [SerializeField] float startAtTime = 28800f;
+    [SerializeField] float morningTime = 28800f;
+
+    DayOfWeek dayOfWeek;
 
     [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI dayOfTheWeekText;
+    [SerializeField] TMPro.TextMeshProUGUI seasonText;
     [SerializeField] Light2D globalLight;
-    private int days;
+    public int days;
+
+    Season currentSeason;
+    const int seasonLength = 30;
 
     List<TimeAgent> agents;
 
@@ -33,6 +61,8 @@ public class DayTimeController : MonoBehaviour
     private void Start()
     {
         time = startAtTime;
+        UpdateDayText();
+        UpdateSeasonText();
     }
 
     public void Subscribe(TimeAgent timeAgent)
@@ -68,6 +98,11 @@ public class DayTimeController : MonoBehaviour
         }
 
         TimeAgents();
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SkipTime(hours: 4);
+        }
     }
 
     private void TimeValueCaculation()
@@ -84,24 +119,98 @@ public class DayTimeController : MonoBehaviour
         globalLight.color = c;
     }
 
-    int oldPhase = 0;
+    int oldPhase = -1;
     private void TimeAgents()
     {
-        int currentPhase = (int)(time / phaseLength);
-
-        if (oldPhase != currentPhase)
+        if (oldPhase == -1)
         {
-            oldPhase = currentPhase;
+            oldPhase = CalculatePhase();
+        }
+
+        int currentPhase = CalculatePhase();
+
+        while (oldPhase < currentPhase)
+        {
+            oldPhase += 1;
             for (int i = 0; i < agents.Count; i++)
             {
-                agents[i].Invoke();
+                agents[i].Invoke(this);
             }
         }
     }
 
+    private int CalculatePhase()
+    {
+        return (int)(time / phaseLength) + (int)(days * phaseInDay);
+    }
+
     private void NextDay()
     {
-        time = 0;
+        time -= secondsInDay;
         days += 1;
+
+        int dayNum = (int)dayOfWeek;
+        dayNum += 1;
+        if (dayNum >= 7)
+        {
+            dayNum = 0;
+        }
+        dayOfWeek = (DayOfWeek)dayNum;
+        UpdateDayText();
+
+        if (days >= seasonLength)
+        {
+            NextSeason();
+        }
+    }
+
+    private void NextSeason()
+    {
+        days = 0;
+        int seasonNum = (int)currentSeason;
+        seasonNum += 1;
+
+        if (seasonNum >= 4)
+        {
+            seasonNum = 0;
+        }
+
+        currentSeason = (Season)seasonNum;
+        UpdateSeasonText();
+    }
+
+    private void UpdateSeasonText()
+    {
+        seasonText.text = currentSeason.ToString();
+    }
+
+    private void UpdateDayText()
+    {
+        dayOfTheWeekText.text = dayOfWeek.ToString();
+    }
+
+    public void SkipTime(float seconds = 0, float minutes = 0, float hours = 0)
+    {
+        float timeToSkip = seconds;
+        timeToSkip += minutes * 60f;
+        timeToSkip += hours * 3600f;
+
+        time += timeToSkip;
+    }
+
+    public void SkipToMorning()
+    {
+        float secondsToSkip = 0f;
+
+        if (time > morningTime)
+        {
+            secondsToSkip += secondsInDay - time + morningTime;
+        }
+        else
+        {
+            secondsToSkip += morningTime - time;
+        }
+
+        SkipTime(secondsToSkip);
     }
 }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ToolAction : ScriptableObject
 {
+    public int energyCost = 0;
+    public SkillType skillType;
+    public int skillExperienceReward = 100;
+
     public virtual bool OnApply(Vector2 worldPoint)
     {
         Debug.LogWarning("OnApply is not implemented");
