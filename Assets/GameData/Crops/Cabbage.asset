@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3683a1e773b2ade4992457608f353646, type: 3}
+  m_Name: Cabbage
+  m_EditorClassIdentifier: 
+  timeToGrow: 20
+  yield: {fileID: 11400000, guid: fb4631638712d87428d3cb741cee8b87, type: 2}
+  count: 3
+  sprites:
+  - {fileID: 1600487109, guid: fa4097920b7084e469eac556f7cbe4f0, type: 3}
+  - {fileID: 549450251, guid: fa4097920b7084e469eac556f7cbe4f0, type: 3}
+  - {fileID: 793670500, guid: fa4097920b7084e469eac556f7cbe4f0, type: 3}
+  - {fileID: 1583480551, guid: fa4097920b7084e469eac556f7cbe4f0, type: 3}
+  growthStageTime: 050000000a0000000f00000014000000

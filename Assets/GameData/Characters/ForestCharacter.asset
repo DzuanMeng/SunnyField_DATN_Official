@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3767cfc863922744e8cca66aafc46465, type: 3}
-  m_Name: FirstCharacterTest
+  m_Name: ForestCharacter
   m_EditorClassIdentifier: 
   Name: Nameless
   gender: 0
@@ -25,6 +25,5 @@ MonoBehaviour:
   itemLikes: []
   itemDislikes: []
   generalDialogues:
-  - {fileID: 11400000, guid: 1759cdde2baecea40a79bddc7a99099d, type: 2}
-  - {fileID: 11400000, guid: 8bd43f83fd068f84ea919035f2fdb074, type: 2}
+  - {fileID: 11400000, guid: a53a912d30afc5e4dba06acea8908f5c, type: 2}
   schedule: 

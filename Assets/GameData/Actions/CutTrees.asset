@@ -17,3 +17,4 @@ MonoBehaviour:
   skillExperienceReward: 100
   sizeOfInteractableArea: 1
   canHitNodesOfType: 01000000
+  hitSound: {fileID: 8300000, guid: 6b6f6bd047444c548ade47eab72d6097, type: 3}

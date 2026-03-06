@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slots:
   - item: {fileID: 11400000, guid: bf75752e16b0f7e4db50005b9812bcad, type: 2}
-    count: 28
+    count: 31
   - item: {fileID: 11400000, guid: f121e10253e5ed14c9978e7fb06d69c5, type: 2}
     count: 0
   - item: {fileID: 11400000, guid: 5677c670df546574389c7a64df4d5cad, type: 2}
@@ -28,7 +28,7 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: effbdcb4a3c341540ae7c21f10692154, type: 2}
     count: 14
   - item: {fileID: 11400000, guid: af5ec1e8cca862c4284113c8ca93ac55, type: 2}
-    count: 2311
+    count: 1001
   - item: {fileID: 0}
     count: 0
   - item: {fileID: 0}

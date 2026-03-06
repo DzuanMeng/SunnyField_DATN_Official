@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: New Dialogue Container 2
   m_EditorClassIdentifier: 
   line:
-  - "Ch\xE0o qu\xFD th\u1EA7y c\xF4"
-  - "\u0110\xE2y l\xE0 test ch\u1EE9c n\u0103ng social"
+  - "Th\u1EDDi gian \u1EDF \u0111\xE2y so v\u1EDBi th\u1EDDi gian th\u1EF1c l\xE0
+    t\u1EC9 l\u1EC7 1:24"
+  - "Ch\xFAc b\u1EA1n c\xF3 tr\u1EA3i nghi\u1EC7m vui v\u1EBB"
   actor: {fileID: 11400000, guid: 8e5d6d14fce98fa439be1a962fb29b35, type: 2}

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +23,11 @@ public class ItemConvertorInteract : Interacterable, IPersistant
     [SerializeField] int producedItemCount = 1;
 
     [SerializeField] int timeToProcess = 5;
+
+    [Header("Audio Settings")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip processingClip;
+    [SerializeField] AudioClip collectClip;
 
     ItemConvertorData data;
 
@@ -56,7 +61,7 @@ public class ItemConvertorInteract : Interacterable, IPersistant
 
     public override void Interact(Character character)
     {
-        if ( data.itemSlot.item == null )
+        if (data.itemSlot.item == null)
         {
             if (GameManager.instance.dragAndDropController.Check(convertableItem))
             {
@@ -65,7 +70,7 @@ public class ItemConvertorInteract : Interacterable, IPersistant
             }
 
             ToolbarController toolbarController = character.GetComponent<ToolbarController>();
-            if ( toolbarController == null ) { return; }
+            if (toolbarController == null) { return; }
 
             ItemSlot itemSlot = toolbarController.GetItemSlot;
 
@@ -75,11 +80,16 @@ public class ItemConvertorInteract : Interacterable, IPersistant
                 return;
             }
         }
-        
-        if (data.itemSlot.item != null && data.timer <= 0)
+        else if (data.itemSlot.item != null && data.timer <= 0)
         {
             GameManager.instance.inventoryContainer.Add(data.itemSlot.item, data.itemSlot.count);
+
             data.itemSlot.Clear();
+
+            if (collectClip != null)
+            {
+                AudioManager.instance.Play(collectClip);
+            }
         }
     }
 
@@ -107,7 +117,22 @@ public class ItemConvertorInteract : Interacterable, IPersistant
 
     private void Animate()
     {
-        animator.SetBool("Working", data.timer > 0f);
+        bool isWorking = data.timer > 0f;
+        animator.SetBool("Working", isWorking);
+
+        if (audioSource != null && processingClip != null)
+        {
+            if (isWorking && !audioSource.isPlaying)
+            {
+                audioSource.clip = processingClip;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+            else if (!isWorking && audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
     }
 
     private void CompleteItemConversion()
@@ -115,6 +140,7 @@ public class ItemConvertorInteract : Interacterable, IPersistant
         Animate();
         data.itemSlot.Clear();
         data.itemSlot.Set(producedItem, producedItemCount);
+        Animate();
     }
 
     public string Read()

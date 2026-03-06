@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2e444b2abf13e46867ee8681399a21, type: 3}
   m_Name: SeedTile
   m_EditorClassIdentifier: 
+  energyCost: 0
+  skillType: 0
+  skillExperienceReward: 100
+  onSeedUsed: {fileID: 8300000, guid: e245c927959926b45816524e818bf0d0, type: 3}

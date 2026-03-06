@@ -6,6 +6,9 @@ public class Damageable : MonoBehaviour
 {
     IDamageable damageable;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip hitSound;
+
     internal void TakeDamage(int damage)
     {
         if ( damageable == null)
@@ -15,6 +18,19 @@ public class Damageable : MonoBehaviour
         damageable.CalculateDamage(ref damage);
         damageable.ApplyDamage(damage);
         GameManager.instance.messageSystem.PostMessage(transform.position, damage.ToString());
+
+        Animator anim = GetComponentInChildren<Animator>();
+
+        if (anim != null)
+        {
+            anim.SetTrigger("hurt");
+        }
+
         damageable.CheckState();
+
+        if (hitSound != null)
+        {
+            AudioManager.instance.Play(hitSound);
+        }
     }
 }

@@ -22,6 +22,9 @@ public class ToolsCharacterController : MonoBehaviour
     AttackController attackController;
     [SerializeField] int weaponEnergyCost = 5;
 
+    [Header("Audio")]
+    [SerializeField]AudioClip weaponSwingSound;
+
     Vector3Int selectTilePosition;
     bool selectable;
 
@@ -70,6 +73,11 @@ public class ToolsCharacterController : MonoBehaviour
         if (item.isWeapon == false) { return; }
 
         EnergyCost(weaponEnergyCost);
+
+        if (weaponSwingSound != null)
+        {
+            AudioManager.instance.Play(weaponSwingSound);
+        }
 
         attackController.Attack(item.damage, characterController2d.lastMotionVector);
 

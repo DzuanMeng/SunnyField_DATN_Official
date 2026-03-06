@@ -75,12 +75,12 @@ public class DayTimeController : MonoBehaviour
         agents.Remove(timeAgent);
     }
 
-    float Hours
+    public float Hours
     {
         get { return time / 3600f; }
     }
 
-    float Minutes
+    public float Minutes
     {
         get { return time % 3600f / 60f; }
     }

@@ -12,7 +12,7 @@ public class JSONStringList : ScriptableObject
     {
         if (strings.Count <= idInList)
         {
-            int count = strings.Count - idInList + 1;
+            int count = idInList - strings.Count + 1;
 
             while (count > 0)
             {

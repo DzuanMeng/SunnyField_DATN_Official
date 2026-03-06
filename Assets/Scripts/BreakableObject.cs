@@ -13,14 +13,18 @@ public class BreakableObject : MonoBehaviour, IDamageable
 
     public void CalculateDamage(ref int damage)
     {
-        damage = 1;
     }
 
     public void CheckState()
     {
         if (hp <= 0)
         {
-            Destroy(gameObject);
+            Animator anim = GetComponentInChildren<Animator>();
+            if (anim != null)
+            {
+                anim.SetTrigger("die");
+            }
+            Destroy(gameObject, 1.0f);
         }
     }
 }

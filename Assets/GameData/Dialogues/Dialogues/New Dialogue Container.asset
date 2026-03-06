@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: New Dialogue Container
   m_EditorClassIdentifier: 
   line:
-  - First line sdadasdasd
-  - Second line dsadasdasweqe
-  - Third line htgeheherhe
+  - "Ch\xE0o m\u1EEBng b\u1EA1n \u0111\u1EBFn v\u1EDBi n\xF4ng tr\u1EA1i SunnyField"
+  - "B\xE2y gi\u1EDD b\u1EA1n h\xE3y th\u1EF1c hi\u1EC7n c\xE1c ch\u1EE9c n\u0103ng
+    theo ph\u1EA7n h\u01B0\u1EDBng d\u1EABn nh\xE9"
+  - "B\xE1m I \u0111\u1EC3 m\u1EDF kho \u0111\u1ED3 v\xE0 ch\u1EBF t\u1EA1o, l\u0103n
+    chu\u1ED9t \u0111\u1EC3 thay \u0111\u1ED5i c\xF4ng c\u1EE5"
   actor: {fileID: 11400000, guid: 8e5d6d14fce98fa439be1a962fb29b35, type: 2}
